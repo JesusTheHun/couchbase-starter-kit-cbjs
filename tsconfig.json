@@ -1,0 +1,38 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "strict": true,
+    "skipLibCheck": true,
+    "incremental": true,
+    "target": "es2022",
+    "lib": ["es2022", "esnext.asynciterable"],
+    "composite": true,
+    "noEmitOnError": true,
+    "noErrorTruncation": true,
+    "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "forceConsistentCasingInFileNames": true,
+    "noUncheckedIndexedAccess": true,
+    "moduleResolution": "node16",
+    "module": "nodenext",
+    "pretty": true,
+    "declaration": true,
+    "declarationMap": true,
+    "outDir": "dist",
+    "allowJs": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "importHelpers": true,
+    "baseUrl": ".",
+    "paths": {
+      "src/*": ["src/*"],
+      "tests/*": ["tests/*"]
+    },
+    "sourceMap": true,
+    "inlineSources": true,
+    "sourceRoot": "/",
+    "types": ["node"]
+  },
+  "include": ["./src/**/*", "./tests/**/*", "./package.json"],
+}
