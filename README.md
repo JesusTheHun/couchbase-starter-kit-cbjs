@@ -23,17 +23,17 @@ For more information on how to this works with other frontends/backends, head ov
 
 ## Codebase
 Each functional domain is located in `src/domains`.
-The domains themselves declare an sub-router and some business logic.
+The domains themselves declare a sub-router and some business logic.
 
-In `src/database` you will find the schemas of the documents.  
-We've decided to use the `arktype` library as the runtime validator.
+In `src/database` you will find the documents' schemas.  
+We've decided to use `arktype` as the runtime validator.
 
-The types of the schemas are used to create the [cluster types](https://cbjs.dev/guide/cluster-types.html) of the application.  
+The types inferred from the schemas are used to create the [cluster types](https://cbjs.dev/guide/cluster-types.html) of the application.  
 Thanks to the amazing [cbjs](https://cbjs.dev) library, this will provide us with type safety and code completion for our database operations.
 
 ## Tests
 
-You will find the tests in `tests/suites`, where each directory contains the tests suites for each domain.  
+You will find the tests in `tests/suites`, where each directory contains the tests of each domain.  
 The tests use `vitest` ⚡️and tRPC server-side callers to perform the API tests.
 
 A helper, `createAuthenticatedTestContext()`, will create a tRPC caller, register and authenticated a new user, so you don't have to do that for every tests.
@@ -51,6 +51,7 @@ It is advised to run this on a large runner, the default ones are tiny tiny and 
 Create the couchbase container by running `bash ./tests/scripts/createCouchbaseContainer.sh`
 
 ```bash
+nvm install
 pnpm i
 pnpm run dev # The server will be reloaded when a change is detected
 ```
