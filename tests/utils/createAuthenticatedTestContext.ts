@@ -5,6 +5,7 @@ import { CouchbaseApiConfig } from '@cbjsdev/vitest/utils';
 import { ConduitScopeBlog } from 'src/database/ConduitClusterTypes.js';
 import { UserId } from 'src/database/models/ids.js';
 import { newCouchbaseConnection } from 'src/database/newCouchbaseConnection.js';
+import { UserAuthenticationOutput } from 'src/domains/authentication/schemas.js';
 import { createCaller } from 'src/trpc/context/createCaller.js';
 import {
   AnonymousApiRequestContext,
@@ -12,6 +13,7 @@ import {
   requestALS,
 } from 'src/trpc/requestALS.js';
 import { getRandomEmail, getRandomUsername } from 'src/utils/getRandom.js';
+import { hasOwn } from 'src/utils/hasOwn.js';
 import { testLogger } from 'tests/setupLogger.js';
 
 export type AuthenticatedTestContext = {
@@ -24,6 +26,7 @@ export type AuthenticatedTestContext = {
   email: string;
   username: string;
   token: string;
+  user: UserAuthenticationOutput['user'];
 };
 
 export async function createAuthenticatedTestContext({ task }: AuthenticatedTestContext) {
@@ -34,8 +37,9 @@ export async function createAuthenticatedTestContext({ task }: AuthenticatedTest
     const requestContext = getUnauthenticatedRequestContext();
 
     const trpcCaller = createCaller(requestContext, {
-      onError: (err) => {
-        testLogger.error(err);
+      onError: ({ error }) => {
+        testLogger.error(error);
+        if (hasOwn(error, 'cause')) testLogger.error(error.cause?.stack);
       },
     });
 
@@ -62,5 +66,6 @@ export async function createAuthenticatedTestContext({ task }: AuthenticatedTest
     taskContext.email = email;
     taskContext.username = username;
     taskContext.token = user.token;
+    taskContext.user = user;
   });
 }

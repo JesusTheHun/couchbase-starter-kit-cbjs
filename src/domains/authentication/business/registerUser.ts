@@ -39,6 +39,7 @@ export async function registerUser(
       bio,
       image,
       follows: {},
+      favorites: {},
     })
   );
 

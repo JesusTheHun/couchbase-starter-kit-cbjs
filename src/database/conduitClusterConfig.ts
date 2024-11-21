@@ -60,12 +60,25 @@ export const clusterConfig: CouchbaseClusterConfig = {
           collections: {
             users: {
               indexes: {
-                user_email: {
+                email: {
                   keys: ['email'],
                 },
               },
             },
-            articles: {},
+            articles: {
+              indexes: {
+                authorId: {
+                  keys: ['authorId'],
+                },
+              },
+            },
+            comments: {
+              indexes: {
+                authorId: {
+                  keys: ['articleId', 'createdAt'],
+                },
+              },
+            },
           },
         },
       },

@@ -4,7 +4,7 @@ import { Logger } from 'pino';
 
 import { ConduitScopeBlog } from 'src/database/ConduitClusterTypes.js';
 import { getJwtFromHeaders } from 'src/utils/getJwtFromHeaders.js';
-import { getRandomId } from 'src/utils/getRandomId.js';
+import { getRandomId } from 'src/utils/getRandom.js';
 import { getUserIdFromJwt } from 'src/utils/getUserIdFromJwt.js';
 
 export function createContext(

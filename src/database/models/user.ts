@@ -1,6 +1,6 @@
 import { type } from 'arktype';
 
-import { arkUserId } from 'src/database/models/ids.js';
+import { arkArticleId, arkUserId } from 'src/database/models/ids.js';
 
 export const arkUserDocument = type({
   'email': 'string.email',
@@ -10,6 +10,9 @@ export const arkUserDocument = type({
   'bio?': 'undefined | string',
   'image?': 'undefined | string',
   'follows': type.Record(arkUserId, {
+    since: 'number.epoch',
+  }),
+  'favorites': type.Record(arkArticleId, {
     since: 'number.epoch',
   }),
 });

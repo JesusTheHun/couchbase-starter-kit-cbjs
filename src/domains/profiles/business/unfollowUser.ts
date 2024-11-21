@@ -9,6 +9,7 @@ export async function unfollowUser(username: string): Promise<void> {
   await cb
     .collection('users')
     .mutateIn(userId)
+    // This little trick allows us to not check the existence of the property and skip a network trip
     .upsert(`follows.${targetUserId}`, null as never)
     .remove(`follows.${targetUserId}`);
 }

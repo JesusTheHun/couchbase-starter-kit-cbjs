@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 import { setHttpClientLogger } from '@cbjsdev/http-client';
+import { setTestLogger } from '@cbjsdev/vitest';
 import { pino, stdTimeFunctions } from 'pino';
 
 import { appConfig } from 'src/config.js';
@@ -35,4 +36,5 @@ export const testLogger = pino({
 });
 
 setLogger(testLogger);
+setTestLogger(testLogger);
 setHttpClientLogger(testLogger);

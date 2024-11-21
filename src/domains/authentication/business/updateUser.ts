@@ -2,7 +2,6 @@ import bcrypt from 'bcryptjs';
 
 import {
   UserAuthenticationOutput,
-  UserRegistrationInput,
   UserUpdateInput,
 } from 'src/domains/authentication/schemas.js';
 import { ForbiddenError } from 'src/errors/ForbiddenError.js';
