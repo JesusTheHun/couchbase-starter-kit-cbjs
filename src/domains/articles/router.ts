@@ -1,10 +1,11 @@
 import { type } from 'arktype';
 
-import { arkArticleId, ArticleId } from 'src/database/models/ids.js';
+import { arkArticleId, ArticleId } from 'src/database/schemas/ids.js';
 import { createArticle } from 'src/domains/articles/business/createArticle.js';
 import { deleteArticle } from 'src/domains/articles/business/deleteArticle.js';
 import { getArticle } from 'src/domains/articles/business/getArticle.js';
 import { getArticles } from 'src/domains/articles/business/getArticles.js';
+import { getTags } from 'src/domains/articles/business/getTags.js';
 import { updateArticle } from 'src/domains/articles/business/updateArticle.js';
 import {
   arkApiArticleCreateInput,
@@ -46,7 +47,6 @@ export const articlesRouter = router({
       return {
         article: {
           ...article,
-          favorited: false,
           author,
         },
       } as never;
@@ -79,4 +79,9 @@ export const articlesRouter = router({
         articles,
       };
     }),
+
+  getTags: publicProcedure.output(type({ tags: 'string[]' }).assert).query(async () => {
+    const tags = await getTags();
+    return { tags };
+  }),
 });

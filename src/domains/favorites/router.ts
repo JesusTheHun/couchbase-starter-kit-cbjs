@@ -1,6 +1,6 @@
 import { type } from 'arktype';
 
-import { arkArticleId } from 'src/database/models/ids.js';
+import { arkArticleId } from 'src/database/schemas/ids.js';
 import { getArticle } from 'src/domains/articles/business/getArticle.js';
 import { addFavorite } from 'src/domains/favorites/business/addFavorite.js';
 import { removeFavorite } from 'src/domains/favorites/business/removeFavorite.js';

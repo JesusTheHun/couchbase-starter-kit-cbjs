@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "@ark/schema": "^0.21.0",
-    "@cbjsdev/cbjs": "^1.21.0",
+    "@cbjsdev/cbjs": "^1.21.1",
     "@paralleldrive/cuid2": "^2.2.2",
     "@trpc/server": "11.0.0-rc.502",
     "arktype": "2.0.0-rc.21",
@@ -36,9 +36,9 @@
     "tslib": "^2.4.0"
   },
   "devDependencies": {
-    "@cbjsdev/deploy": "^1.21.0",
-    "@cbjsdev/http-client": "^1.21.0",
-    "@cbjsdev/vitest": "^1.21.0",
+    "@cbjsdev/deploy": "^1.21.1",
+    "@cbjsdev/http-client": "^1.21.1",
+    "@cbjsdev/vitest": "^1.21.1",
     "@ianvs/prettier-plugin-sort-imports": "^4.3.1",
     "@rollup/plugin-json": "^6.1.0",
     "@rollup/plugin-node-resolve": "^15.2.3",

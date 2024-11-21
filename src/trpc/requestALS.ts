@@ -3,7 +3,7 @@ import { AsyncLocalStorage } from 'async_hooks';
 import { Logger } from 'pino';
 
 import { ConduitScopeBlog } from 'src/database/ConduitClusterTypes.js';
-import type { UserId } from 'src/database/models/ids.js';
+import type { UserId } from 'src/database/schemas/ids.js';
 import { getLogger } from 'src/logger.js';
 import { RequiredProps } from 'src/types/RequiredProps.js';
 import { hasOwn } from 'src/utils/hasOwn.js';

@@ -1,4 +1,4 @@
-import { ArticleId } from 'src/database/models/ids.js';
+import { ArticleId } from 'src/database/schemas/ids.js';
 import { ApiArticleUpdateInput } from 'src/domains/articles/schemas.js';
 import { createSlug } from 'src/domains/articles/utils/createSlug.js';
 import { ForbiddenError } from 'src/errors/ForbiddenError.js';
@@ -11,8 +11,8 @@ export async function updateArticle(
   const { userId, cb } = getRequestContext();
 
   const {
-    content: [{ value: authorId }],
-  } = await cb.collection('articles').lookupIn(articleId).get('authorId');
+    content: [{ value: authorId }, { value: currentTitle }],
+  } = await cb.collection('articles').lookupIn(articleId).get('authorId').get('title');
 
   if (userId != authorId) {
     throw new ForbiddenError();
@@ -31,10 +31,13 @@ export async function updateArticle(
     mutations.replace('description', data.description);
   }
 
-  if (!data.title) {
+  if (!data.title || data.title === currentTitle) {
     await mutations;
     return articleId;
   }
+
+  // If we reach this point, it's because the title has changed
+  // We need to change the document key ; the only way to do that is to insert a new doc and remove the old one
 
   const newSlug = createSlug(data.title);
   const newArticleId: ArticleId = `article__${newSlug}`;
@@ -42,7 +45,7 @@ export async function updateArticle(
   // We set this property so in the event of an app crash between deletion and creation,
   // we can still reconcile the state of data
 
-  mutations.upsert('replacedBy', newArticleId);
+  mutations.insert('replacedBy', newArticleId);
   await mutations;
 
   const { content: doc } = await cb.collection('articles').get(articleId);

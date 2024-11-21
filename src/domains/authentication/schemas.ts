@@ -1,6 +1,6 @@
 import { type } from 'arktype';
 
-import { arkUserId } from 'src/database/models/ids.js';
+import { arkUserId } from 'src/database/schemas/ids.js';
 
 export const arkJwtPayload = type({
   userId: arkUserId,

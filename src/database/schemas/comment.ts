@@ -1,6 +1,6 @@
 import { type } from 'arktype';
 
-import { arkArticleId, arkUserId } from 'src/database/models/ids.js';
+import { arkArticleId, arkUserId } from 'src/database/schemas/ids.js';
 
 export const arkCommentDocument = type({
   createdAt: 'number.epoch',

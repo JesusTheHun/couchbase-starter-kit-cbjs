@@ -2,7 +2,7 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
 import { appConfig } from 'src/config.js';
-import { UserId } from 'src/database/models/ids.js';
+import { UserId } from 'src/database/schemas/ids.js';
 import { ForbiddenError } from 'src/errors/ForbiddenError.js';
 import { getRequestContext } from 'src/trpc/requestALS.js';
 import { invariant } from 'src/utils/type-guards.js';

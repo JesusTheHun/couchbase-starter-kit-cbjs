@@ -144,37 +144,38 @@ describe('getArticles', () => {
     expect(result.articles[0]?.title).toEqual('first');
   });
 
-  it.todo<AuthenticatedTestContext>(
-    'should return the list with favorited by the given author',
-    async ({ requestContext, trpcCaller, cb, user }) => {
-      await trpcCaller.articles.createArticle({
-        article: {
-          title: 'first',
-          description:
-            'Discover why Cbjs is so good. The 4th reason will blow your mind!',
-          body: 'Yada yada, the best, whatever',
-          tagList: ['couchbase'],
-        },
-      });
+  it<AuthenticatedTestContext>('should return the list of articles favorited by the given user', async ({
+    trpcCaller,
+    cb,
+    userId,
+  }) => {
+    const { article } = await trpcCaller.articles.createArticle({
+      article: {
+        title: 'first',
+        description: 'Discover why Cbjs is so good. The 4th reason will blow your mind!',
+        body: 'Yada yada, the best, whatever',
+        tagList: ['couchbase'],
+      },
+    });
 
-      await trpcCaller.articles.createArticle({
-        article: {
-          title: 'second',
-          description:
-            'Discover why Cbjs is so good. The 4th reason will blow your mind!',
-          body: 'Yada yada, the best, whatever',
-          tagList: ['typescript'],
-        },
-      });
+    await trpcCaller.articles.createArticle({
+      article: {
+        title: 'second',
+        description: 'Discover why Cbjs is so good. The 4th reason will blow your mind!',
+        body: 'Yada yada, the best, whatever',
+        tagList: ['typescript'],
+      },
+    });
 
-      await waitForAllArticles(cb);
+    await trpcCaller.articles.addFavorite({ slug: article.slug });
 
-      const result = await trpcCaller.articles.getArticles({
-        tag: 'couchbase',
-      });
+    await waitForAllArticles(cb);
 
-      expect(result.articles).toHaveLength(1);
-      expect(result.articles[0]?.title).toEqual('first');
-    }
-  );
+    const result = await trpcCaller.articles.getArticles({
+      favorited: userId,
+    });
+
+    expect(result.articles).toHaveLength(1);
+    expect(result.articles[0]?.title).toEqual('first');
+  });
 });

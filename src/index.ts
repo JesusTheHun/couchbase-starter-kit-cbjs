@@ -1,9 +1,6 @@
-import './configure-arktype.js';
-import './instrument.js';
-
 import 'tslib';
-import { appLogger } from "src/logger.js";
 
+import { appLogger } from 'src/logger.js';
 import { startServer } from 'src/startServer.js';
 import { appConfig } from './config.js';
 
@@ -17,11 +14,10 @@ process.on('SIGINT', () => {
     process.exit(1);
   }, 10_000);
 
-  closeServer()
-    .then(() => {
-      console.log('HTTP server closed.');
-      process.exit(0);
-    });
+  closeServer().then(() => {
+    console.log('HTTP server closed.');
+    process.exit(0);
+  });
 });
 
 console.info(`Listening on port ${appConfig.PORT}`);

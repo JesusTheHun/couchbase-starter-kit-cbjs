@@ -1,9 +1,9 @@
 import { ClusterScope, DocDef } from '@cbjsdev/cbjs';
 
-import { ArticleDocument } from 'src/database/models/article.js';
-import { ArticleId, CommentId, UserId } from 'src/database/models/ids.js';
-import { UserDocument } from 'src/database/models/user.js';
-import { CommentDocument } from './models/comments.js';
+import { ArticleDocument } from 'src/database/schemas/article.js';
+import { CommentDocument } from 'src/database/schemas/comment.js';
+import { ArticleId, CommentId, UserId } from 'src/database/schemas/ids.js';
+import { UserDocument } from 'src/database/schemas/user.js';
 
 export type ConduitClusterTypes = {
   '@options': {

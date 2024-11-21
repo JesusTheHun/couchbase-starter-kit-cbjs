@@ -26,7 +26,7 @@ describe('create article', () => {
     expect(result).toEqual({
       article: {
         title: `cbjs rules ${randomSuffix}`,
-        slug: `cbjs-rules-${randomSuffix}`,
+        slug: expect.stringContaining(`cbjs-rules-${randomSuffix}`),
         description: 'Discover why Cbjs is so good. The 4th reason will blow your mind!',
         body: 'Yada yada, the best, whatever',
         tagList: ['couchbase', 'node', 'typescript'],

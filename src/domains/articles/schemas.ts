@@ -1,7 +1,7 @@
 import { type } from 'arktype';
 
-import { arkArticleDocument } from 'src/database/models/article.js';
-import { arkUserId } from 'src/database/models/ids.js';
+import { arkArticleDocument } from 'src/database/schemas/article.js';
+import { arkUserId } from 'src/database/schemas/ids.js';
 import { arkApiUserProfileOutput } from 'src/domains/profiles/schemas.js';
 import { epochToIso } from 'src/utils/epochToIso.js';
 

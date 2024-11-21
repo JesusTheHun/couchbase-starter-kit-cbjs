@@ -8,6 +8,7 @@ import type { GlobalSetupContext } from 'vitest/node';
 
 import { appConfig } from 'src/config.js';
 import { clusterConfig } from 'src/database/conduitClusterConfig.js';
+import { testLogger } from 'tests/setupLogger.js';
 
 export async function setup({ config }: GlobalSetupContext) {
   const cluster = await connect(appConfig.CB_CONNECTION_STRING, {

@@ -31,6 +31,6 @@ export function startServer({ logger }: { logger: Logger }) {
 
   httpServer.listen(appConfig.PORT);
 
-  const close = promisify(httpServer.close);
+  const close = promisify(httpServer.close).bind(httpServer);
   return async () => await close();
 }

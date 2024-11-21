@@ -14,7 +14,7 @@ describe('update article', () => {
     user,
   }) => {
     const randomSuffix = getRandomId();
-    await trpcCaller.articles.createArticle({
+    const { article } = await trpcCaller.articles.createArticle({
       article: {
         title: `cbjs rules ${randomSuffix}`,
         description: 'Discover why Cbjs is so good. The 4th reason will blow your mind!',
@@ -24,7 +24,7 @@ describe('update article', () => {
     });
 
     const result = await trpcCaller.articles.updateArticle({
-      slug: `cbjs-rules-${randomSuffix}`,
+      slug: article.slug,
       article: {
         body: 'article updated!',
       },
@@ -38,7 +38,7 @@ describe('update article', () => {
     cb,
   }) => {
     const randomSuffix = getRandomId();
-    await trpcCaller.articles.createArticle({
+    const { article } = await trpcCaller.articles.createArticle({
       article: {
         title: `cbjs rules ${randomSuffix}`,
         description: 'Discover why Cbjs is so good. The 4th reason will blow your mind!',
@@ -48,7 +48,7 @@ describe('update article', () => {
     });
 
     const result = await trpcCaller.articles.updateArticle({
-      slug: `cbjs-rules-${randomSuffix}`,
+      slug: article.slug,
       article: {
         title: `new rules ${randomSuffix}`,
       },
@@ -57,14 +57,14 @@ describe('update article', () => {
     expect(result.article.title).toEqual(`new rules ${randomSuffix}`);
 
     // We check the former document has been deleted
-    const { exists } = await cb
-      .collection('articles')
-      .exists(`article__cbjs-rules-${randomSuffix}`);
+    const { exists } = await cb.collection('articles').exists(`article__${article.slug}`);
+
+    expect(exists).toBe(false);
 
     // We check the new document does not have `replacedBy`
     const { content } = await cb
       .collection('articles')
-      .get(`article__new-rules-${randomSuffix}`);
+      .get(`article__${result.article.slug}`);
 
     expect(content.replacedBy).toBeUndefined();
   });
@@ -74,7 +74,7 @@ describe('update article', () => {
     requestContext,
   }) => {
     const randomSuffix = getRandomId();
-    await trpcCaller.articles.createArticle({
+    const { article } = await trpcCaller.articles.createArticle({
       article: {
         title: `cbjs rules ${randomSuffix}`,
         description: 'Discover why Cbjs is so good. The 4th reason will blow your mind!',
@@ -87,7 +87,7 @@ describe('update article', () => {
 
     await expect(
       trpcCaller.articles.updateArticle({
-        slug: `cbjs-rules-${randomSuffix}`,
+        slug: article.slug,
         article: {
           body: 'article updated!',
         },

@@ -1,11 +1,8 @@
-import {
-  ApiArticleCriteria,
-  ApiGetArticlesOutput,
-} from 'src/domains/articles/schemas.js';
-import { getRequestContext } from 'src/trpc/requestALS.js';
+import { ApiArticleCriteria } from 'src/domains/articles/schemas.js';
+import { getUnauthenticatedRequestContext } from 'src/trpc/requestALS.js';
 
 export async function getArticles(criteria: ApiArticleCriteria) {
-  const { cb } = getRequestContext();
+  const { cb } = getUnauthenticatedRequestContext();
 
   const where: string[] = ['articles.authorId IS NOT MISSING'];
   const parameters: Record<string, string | number> = {};
@@ -22,7 +19,7 @@ export async function getArticles(criteria: ApiArticleCriteria) {
   }
 
   if (criteria.favorited) {
-    letClause = `LET favorites = SELECT RAW OBJECT_NAMES(users.favorites) FROM users USE KEY $favorited`;
+    letClause = `LET favorites = (SELECT RAW OBJECT_NAMES(users.favorites) FROM users USE KEYS $favorited)[0]`;
     parameters['favorited'] = criteria.favorited;
     where.push('META(articles).id IN favorites');
   }
@@ -32,15 +29,13 @@ export async function getArticles(criteria: ApiArticleCriteria) {
   const whereClause = where.join(' AND ');
 
   const query = `
-  ${letClause}
   SELECT * FROM articles
   LEFT JOIN users AS author ON KEYS articles.authorId
+  ${letClause}
   WHERE ${whereClause}
   ORDER BY articles.createdAt DESC
   ${pagination}
   `;
-
-  console.log(query);
 
   const result = await cb.query(query, { parameters });
 

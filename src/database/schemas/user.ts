@@ -1,6 +1,6 @@
 import { type } from 'arktype';
 
-import { arkArticleId, arkUserId } from 'src/database/models/ids.js';
+import { arkArticleId, arkUserId } from 'src/database/schemas/ids.js';
 
 export const arkUserDocument = type({
   'email': 'string.email',
@@ -15,6 +15,7 @@ export const arkUserDocument = type({
   'favorites': type.Record(arkArticleId, {
     since: 'number.epoch',
   }),
+  'replacedBy': arkUserId.optional(),
 });
 
 export type UserDocument = typeof arkUserDocument.infer;

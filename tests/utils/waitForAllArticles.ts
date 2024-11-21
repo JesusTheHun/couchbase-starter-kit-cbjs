@@ -8,7 +8,20 @@ import { ConduitScopeBlog } from 'src/database/ConduitClusterTypes.js';
  * performed without RequestPlus.
  */
 export async function waitForAllArticles(cb: ConduitScopeBlog) {
-  await cb.query('SELECT * FROM articles WHERE authorId IS NOT MISSING', {
-    scanConsistency: QueryScanConsistency.RequestPlus,
-  });
+  await cb.query(
+    `SELECT /*+ INDEX (articles authorId) */
+    * FROM articles WHERE authorId IS NOT MISSING`,
+    {
+      scanConsistency: QueryScanConsistency.RequestPlus,
+    }
+  );
+
+  // We add an INDEX hint so the query uses the index we want to await
+  await cb.query(
+    `SELECT /*+ INDEX (articles tags) */ 
+    * FROM articles WHERE authorId IS NOT MISSING`,
+    {
+      scanConsistency: QueryScanConsistency.RequestPlus,
+    }
+  );
 }

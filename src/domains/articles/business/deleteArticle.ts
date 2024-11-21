@@ -1,4 +1,4 @@
-import { ArticleId } from 'src/database/models/ids.js';
+import { ArticleId } from 'src/database/schemas/ids.js';
 import { ForbiddenError } from 'src/errors/ForbiddenError.js';
 import { getRequestContext } from 'src/trpc/requestALS.js';
 

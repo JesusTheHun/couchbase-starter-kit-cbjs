@@ -49,6 +49,30 @@ describe('updateUser', () => {
     ).rejects.toThrowTRPCError('UNAUTHORIZED');
   });
 
+  it<AuthenticatedTestContext>('should change the username of a user', async ({
+    requestContext,
+    trpcCaller,
+    cb,
+    userId,
+  }) => {
+    const nextUsername = getRandomUsername();
+
+    await trpcCaller.auth.updateUser({
+      user: {
+        username: nextUsername,
+      },
+    });
+
+    requestContext.userId = `user__${nextUsername}`;
+
+    const { user } = await trpcCaller.profiles.me();
+
+    expect(user.username).toEqual(nextUsername);
+
+    const { exists } = await cb.collection('users').exists(userId);
+    expect(exists).toBe(false);
+  });
+
   it<AuthenticatedTestContext>('should throw a FORBIDDEN error when trying to change your username for one that is already taken', async ({
     trpcCaller,
     requestContext,

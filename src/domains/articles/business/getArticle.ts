@@ -1,4 +1,4 @@
-import { ArticleId } from 'src/database/models/ids.js';
+import { ArticleId } from 'src/database/schemas/ids.js';
 import { extractUsername } from 'src/domains/authentication/utils/extractUsername.js';
 import { getUserProfile } from 'src/domains/profiles/business/getUserProfile.js';
 import { getUnauthenticatedRequestContext } from 'src/trpc/requestALS.js';

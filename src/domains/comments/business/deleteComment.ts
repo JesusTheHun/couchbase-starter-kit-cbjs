@@ -1,5 +1,5 @@
-import { arkCommentDocument, CommentDocument } from 'src/database/models/comments.js';
-import { arkCommentId, ArticleId, CommentId } from 'src/database/models/ids.js';
+import { arkCommentDocument, CommentDocument } from 'src/database/schemas/comment.js';
+import { arkCommentId, ArticleId, CommentId } from 'src/database/schemas/ids.js';
 import { ForbiddenError } from 'src/errors/ForbiddenError.js';
 import { getRequestContext } from 'src/trpc/requestALS.js';
 import { getRandomId } from 'src/utils/getRandom.js';

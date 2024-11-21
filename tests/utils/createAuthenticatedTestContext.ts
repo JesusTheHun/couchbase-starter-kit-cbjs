@@ -3,8 +3,8 @@ import { RunnerTestCase } from 'vitest';
 import { CouchbaseApiConfig } from '@cbjsdev/vitest/utils';
 
 import { ConduitScopeBlog } from 'src/database/ConduitClusterTypes.js';
-import { UserId } from 'src/database/models/ids.js';
 import { newCouchbaseConnection } from 'src/database/newCouchbaseConnection.js';
+import { UserId } from 'src/database/schemas/ids.js';
 import { UserAuthenticationOutput } from 'src/domains/authentication/schemas.js';
 import { createCaller } from 'src/trpc/context/createCaller.js';
 import {
@@ -15,6 +15,7 @@ import {
 import { getRandomEmail, getRandomUsername } from 'src/utils/getRandom.js';
 import { hasOwn } from 'src/utils/hasOwn.js';
 import { testLogger } from 'tests/setupLogger.js';
+import { waitForAllUsers } from 'tests/utils/waitForAllUsers.js';
 
 export type AuthenticatedTestContext = {
   task: RunnerTestCase<AuthenticatedTestContext>;
@@ -53,6 +54,8 @@ export async function createAuthenticatedTestContext({ task }: AuthenticatedTest
         password: 'password',
       },
     });
+
+    await waitForAllUsers(cb);
 
     const userId: UserId = `user__${username}`;
 

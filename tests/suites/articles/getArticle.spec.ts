@@ -27,7 +27,7 @@ describe('getArticle', () => {
     cb,
     userId,
   }) => {
-    await trpcCaller.articles.createArticle({
+    const { article } = await trpcCaller.articles.createArticle({
       article: {
         title: 'first',
         description: 'Discover why Cbjs is so good. The 4th reason will blow your mind!',
@@ -38,7 +38,7 @@ describe('getArticle', () => {
 
     await waitForAllArticles(cb);
 
-    const result = await trpcCaller.articles.getArticle({ slug: 'first' });
+    const result = await trpcCaller.articles.getArticle({ slug: article.slug });
 
     expect(result.article).toEqual(
       expect.objectContaining({

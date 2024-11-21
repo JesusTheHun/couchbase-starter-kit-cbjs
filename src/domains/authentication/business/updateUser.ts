@@ -1,5 +1,6 @@
 import bcrypt from 'bcryptjs';
 
+import { UserId } from 'src/database/schemas/ids.js';
 import {
   UserAuthenticationOutput,
   UserUpdateInput,
@@ -15,17 +16,6 @@ export async function updateUser(
   const { username, email, password, bio, image } = data;
 
   const mutations = cb.collection('users').mutateIn(userId);
-
-  if (username && `user__${username}` !== userId) {
-    const { exists } = await cb.collection('users').exists(`user__${username}`);
-
-    if (exists) {
-      throw new ForbiddenError('The username is already taken.');
-    }
-
-    // TODO need to rename (remove/insert) the user document
-    mutations.replace('username', username);
-  }
 
   if (password) {
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -44,7 +34,38 @@ export async function updateUser(
     mutations.upsert('image', image);
   }
 
-  await mutations;
+  const nextUserId: UserId = username ? `user__${username}` : userId;
+
+  // No change in username
+  if (!username || nextUserId === userId) {
+    await mutations;
+  }
+
+  // Change in username
+  // We need to change the document key ; the only way to do that is to insert a new doc and remove the old one
+  if (username && nextUserId !== userId) {
+    const { exists } = await cb.collection('users').exists(`user__${username}`);
+
+    if (exists) {
+      throw new ForbiddenError('The username is already taken.');
+    }
+
+    // We set this property so in the event of an app crash between deletion and creation,
+    // we can still reconcile the state of data
+
+    mutations.insert('replacedBy', nextUserId);
+    await mutations;
+
+    const { content: doc } = await cb.collection('users').get(userId);
+
+    const { replacedBy, ...rest } = doc;
+    await cb.collection('users').insert(nextUserId, {
+      ...rest,
+      username,
+    });
+
+    await cb.collection('users').remove(userId);
+  }
 
   const {
     content: [
@@ -55,7 +76,7 @@ export async function updateUser(
     ],
   } = await cb
     .collection('users')
-    .lookupIn(userId)
+    .lookupIn(nextUserId)
     .get('bio')
     .get('image')
     .get('email')

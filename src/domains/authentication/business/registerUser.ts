@@ -2,8 +2,8 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
 import { appConfig } from 'src/config.js';
-import { arkUserId } from 'src/database/models/ids.js';
-import { arkUserDocument } from 'src/database/models/user.js';
+import { arkUserId } from 'src/database/schemas/ids.js';
+import { arkUserDocument } from 'src/database/schemas/user.js';
 import {
   UserAuthenticationOutput,
   UserRegistrationInput,

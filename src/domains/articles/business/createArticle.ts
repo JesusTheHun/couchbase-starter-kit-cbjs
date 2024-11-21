@@ -1,5 +1,5 @@
-import { arkArticleDocument, ArticleDocument } from 'src/database/models/article.js';
-import { arkArticleId } from 'src/database/models/ids.js';
+import { arkArticleDocument, ArticleDocument } from 'src/database/schemas/article.js';
+import { arkArticleId } from 'src/database/schemas/ids.js';
 import { ApiArticleCreateInput } from 'src/domains/articles/schemas.js';
 import { createSlug } from 'src/domains/articles/utils/createSlug.js';
 import { getRequestContext } from 'src/trpc/requestALS.js';

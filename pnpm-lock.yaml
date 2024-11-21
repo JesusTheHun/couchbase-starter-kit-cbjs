@@ -12,8 +12,8 @@ importers:
         specifier: ^0.21.0
         version: 0.21.0
       '@cbjsdev/cbjs':
-        specifier: ^1.21.0
-        version: 1.21.0
+        specifier: ^1.21.1
+        version: 1.21.1
       '@paralleldrive/cuid2':
         specifier: ^2.2.2
         version: 2.2.2
@@ -55,14 +55,14 @@ importers:
         version: 2.8.1
     devDependencies:
       '@cbjsdev/deploy':
-        specifier: ^1.21.0
-        version: 1.21.0
+        specifier: ^1.21.1
+        version: 1.21.1
       '@cbjsdev/http-client':
-        specifier: ^1.21.0
-        version: 1.21.0
+        specifier: ^1.21.1
+        version: 1.21.1
       '@cbjsdev/vitest':
-        specifier: ^1.21.0
-        version: 1.21.0(@vitest/runner@1.6.0)(vitest@2.1.5(@types/node@20.17.6)(@vitest/ui@2.1.5))
+        specifier: ^1.21.1
+        version: 1.21.1(@vitest/runner@1.6.0)(vitest@2.1.5(@types/node@20.17.6)(@vitest/ui@2.1.5))
       '@ianvs/prettier-plugin-sort-imports':
         specifier: ^4.3.1
         version: 4.4.0(prettier@3.2.5)
@@ -183,23 +183,23 @@ packages:
     resolution: {integrity: sha512-Z/yiTPj+lDVnF7lWeKCIJzaIkI0vYO87dMpZ4bg4TDrFe4XXLFWL1TbXU27gBP3QccxV9mZICCrnjnYlJjXHOA==}
     engines: {node: '>=6.9.0'}
 
-  '@cbjsdev/cbjs@1.21.0':
-    resolution: {integrity: sha512-bd1k4K1ukKeFABnhHYhoj9KLNYoZA3EejdhC3g4KXxJZYvfWEhH6JrRWS2MQPwbTQfz0pOa59fbYEP7Z9WkXDQ==}
+  '@cbjsdev/cbjs@1.21.1':
+    resolution: {integrity: sha512-ifBaG1W/BMNOPiTQphCjTB8ZzCS0mXjOlm256wjnUD51f5ZvSvVHr0dwYoDgV6IC2E4RWf7OOdXZ12zWhyNpSA==}
     engines: {node: '>=18.20.4'}
 
-  '@cbjsdev/deploy@1.21.0':
-    resolution: {integrity: sha512-bK7TiwM/bY0OYAIDKkYLLgIbIE6cvw+SdK4SYjKIT5ARj4K9uPiR7WHgbU6WwaeCEj3WzFOp2RaNomFuzop9RA==}
+  '@cbjsdev/deploy@1.21.1':
+    resolution: {integrity: sha512-qz5RM5DJJoCRryYwlOrnx9gOmy3kfMKJGoW1QXB+scre3ayThXIK6K9G+AFppgpPRY0UMg5BbzRSUzR7jIiHnw==}
     engines: {node: '>=18.20.4'}
 
-  '@cbjsdev/http-client@1.21.0':
-    resolution: {integrity: sha512-sVJvhnozIw7SENp8l3NhyqY4k9Gz+GSTKvbRaAtV8Zc2v1FV3fSeVodo7FKLA6yBE9WIKkqNi+RyXBBVhObw1A==}
+  '@cbjsdev/http-client@1.21.1':
+    resolution: {integrity: sha512-IhxDoDyXWI4wBhP5AgxHdKzYXcXXZuv4S3SHV4/VxvVWjeNBiBi/nIfwTE89uOyxAq14jL3+qOotYy2oZegUMw==}
 
-  '@cbjsdev/shared@1.21.0':
-    resolution: {integrity: sha512-GDmfdun4ENv/f2HYdMIbfdlnvUrdsPKcToUiPPA3KTc4C++ZafjMukXCw2bj9auLouTXcC69FcY3NAsjqNfhSQ==}
+  '@cbjsdev/shared@1.21.1':
+    resolution: {integrity: sha512-DWJQNws6mJTUW4LYRlIRqXH8jDV+wgCSQCUS4T5G467S5jQwwC8oynDYb7N3blYATncJsKuW1TPnPJKc2L4j3g==}
     engines: {node: '>=18.20.4'}
 
-  '@cbjsdev/vitest@1.21.0':
-    resolution: {integrity: sha512-UI5EEQFmMLVJS5ptiLnoQNodsw9YzkQZQ22Vja2sQyRgloAaOK9PyydcMtram/qGRbS/x9cMb3NcBS4lhoxKMg==}
+  '@cbjsdev/vitest@1.21.1':
+    resolution: {integrity: sha512-MP6lPQcO9HGvGZbYy7M7dFftNcP0hgdLuvRZAIQWK97cG2f3FRWcfdJkc4pYH1Bo20/7g5+EVCjAZfhF5dNgEA==}
     engines: {node: '>=18.20.4'}
     peerDependencies:
       '@vitest/runner': ^1.5.2
@@ -2002,33 +2002,33 @@ snapshots:
       '@babel/helper-string-parser': 7.25.9
       '@babel/helper-validator-identifier': 7.25.9
 
-  '@cbjsdev/cbjs@1.21.0':
+  '@cbjsdev/cbjs@1.21.1':
     dependencies:
-      '@cbjsdev/http-client': 1.21.0
-      '@cbjsdev/shared': 1.21.0
+      '@cbjsdev/http-client': 1.21.1
+      '@cbjsdev/shared': 1.21.1
       tar: 6.2.1
 
-  '@cbjsdev/deploy@1.21.0':
+  '@cbjsdev/deploy@1.21.1':
     dependencies:
-      '@cbjsdev/cbjs': 1.21.0
-      '@cbjsdev/http-client': 1.21.0
-      '@cbjsdev/shared': 1.21.0
+      '@cbjsdev/cbjs': 1.21.1
+      '@cbjsdev/http-client': 1.21.1
+      '@cbjsdev/shared': 1.21.1
 
-  '@cbjsdev/http-client@1.21.0':
+  '@cbjsdev/http-client@1.21.1':
     dependencies:
-      '@cbjsdev/shared': 1.21.0
+      '@cbjsdev/shared': 1.21.1
       json-bigint: 1.0.0
       node-fetch: 3.3.2
       semver: 7.6.3
       ts-retry-promise: 0.8.1
 
-  '@cbjsdev/shared@1.21.0': {}
+  '@cbjsdev/shared@1.21.1': {}
 
-  '@cbjsdev/vitest@1.21.0(@vitest/runner@1.6.0)(vitest@2.1.5(@types/node@20.17.6)(@vitest/ui@2.1.5))':
+  '@cbjsdev/vitest@1.21.1(@vitest/runner@1.6.0)(vitest@2.1.5(@types/node@20.17.6)(@vitest/ui@2.1.5))':
     dependencies:
-      '@cbjsdev/cbjs': 1.21.0
-      '@cbjsdev/http-client': 1.21.0
-      '@cbjsdev/shared': 1.21.0
+      '@cbjsdev/cbjs': 1.21.1
+      '@cbjsdev/http-client': 1.21.1
+      '@cbjsdev/shared': 1.21.1
       '@vitest/runner': 1.6.0
       segfault-handler: 1.3.0
       ts-retry-promise: 0.8.1
