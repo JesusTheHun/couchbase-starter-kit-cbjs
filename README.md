@@ -5,9 +5,6 @@
  <img src="/assets/cbjs-logo.svg" height="80" width="120"/>
  <img src="/assets/couchbase-logo.svg" height="80" width="120"/>
 </p>
-<p align="center">
-A modern Couchbase SDK for Node.js & TypeScript.
-<p>
 
 > ### tRPC.io, Couchbase and Cbjs codebase containing real world examples (CRUD, auth, advanced patterns, etc) that adheres to the [RealWorld](https://github.com/gothinkster/realworld) spec and API.
 
