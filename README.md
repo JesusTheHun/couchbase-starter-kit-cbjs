@@ -1,11 +1,9 @@
 # ![RealWorld Example App](/assets/realworld-app-logo.png)
 
-<p style="font-size: 3rem; display: flex; justify-content: center; gap: 1.5rem;">
- <img src="/assets/trpcio-logo.svg" height="80" />
-    +
- <img src="/assets/cbjs-logo.svg" height="80" />
-    +  
- <img src="/assets/couchbase-logo.svg" height="80" />
+<p align="center">
+ <img src="/assets/trpcio-logo.svg" height="80" width="120"/>
+ <img src="/assets/cbjs-logo.svg" height="80" width="120"/>
+ <img src="/assets/couchbase-logo.svg" height="80" width="120"/>
 </p>
 <p align="center">
 A modern Couchbase SDK for Node.js & TypeScript.
