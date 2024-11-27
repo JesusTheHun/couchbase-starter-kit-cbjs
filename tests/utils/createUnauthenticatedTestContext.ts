@@ -7,11 +7,9 @@ import { newCouchbaseConnection } from 'src/database/newCouchbaseConnection.js';
 import { createCaller } from 'src/trpc/context/createCaller.js';
 import {
   AnonymousApiRequestContext,
-  getRequestContext,
   getUnauthenticatedRequestContext,
   requestALS,
 } from 'src/trpc/requestALS.js';
-import { getRandomId } from 'src/utils/getRandomId.js';
 import { testLogger } from 'tests/setupLogger.js';
 
 export type UnauthenticatedTestContext = {

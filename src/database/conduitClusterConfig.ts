@@ -39,7 +39,7 @@ export const clusterConfig: CouchbaseClusterConfig = {
   },
   users: [
     {
-      username: 'api',
+      username: 'conduit_api',
       password: 'password',
       roles: [
         {

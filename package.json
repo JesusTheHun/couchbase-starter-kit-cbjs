@@ -11,8 +11,9 @@
   "packageManager": "pnpm@9.0.6",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
-    "start": "node dist/src/index.js",
-    "dev": "cross-env NODE_ENV=development pnpm dlx tsx watch src/index.ts",
+    "dev": "tsc --build --watch",
+    "server": "node dist/src/index.js",
+    "server-dev": "cross-env NODE_ENV=development pnpm dlx tsx watch src/index.ts",
     "build": "rm -rf dist && tsc -p tsconfig.build.json && tsconfig-replace-paths --project tsconfig.build.json",
     "test": "cross-env NODE_ENV=test vitest --config vitest.config.mts run",
     "test:watch": "cross-env NODE_ENV=test vitest --config vitest.config.mts watch",

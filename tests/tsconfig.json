@@ -1,0 +1,17 @@
+{
+  "extends": "../tsconfig.base.json",
+  "compilerOptions": {
+    "disableSourceOfProjectReferenceRedirect": false,
+    "outDir": "./dist",
+    "paths": {
+      "src/*": ["../src/*"],
+      "tests/*": ["./*"]
+    }
+  },
+  "include": ["./"],
+  "references": [
+    {
+      "path": "../src"
+    }
+  ]
+}
