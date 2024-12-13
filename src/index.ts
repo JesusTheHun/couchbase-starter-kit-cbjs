@@ -15,7 +15,7 @@ process.on('SIGINT', () => {
   }, 10_000);
 
   closeServer().then(() => {
-    console.log('HTTP server closed.');
+    console.log('Exiting now.');
     process.exit(0);
   });
 });

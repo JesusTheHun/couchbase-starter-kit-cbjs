@@ -1,6 +1,3 @@
-import { log } from 'node:util';
-import { promisify } from 'util';
-
 import { createHTTPServer } from '@trpc/server/adapters/standalone';
 import cors from 'cors';
 import { Logger } from 'pino';
@@ -10,10 +7,12 @@ import { newCouchbaseConnection } from 'src/database/newCouchbaseConnection.js';
 import { appRouter } from 'src/trpc/appRouter.js';
 import { createContext } from 'src/trpc/context/createContext.js';
 
+
 /**
  * Start the tRPC server and returns a function to shut it down.
  */
 export function startServer({ logger }: { logger: Logger }) {
+  const connectionPromise = newCouchbaseConnection();
   const httpServer = createHTTPServer({
     middleware: cors({
       origin: true,
@@ -21,16 +20,31 @@ export function startServer({ logger }: { logger: Logger }) {
     }),
     router: appRouter,
     createContext: async (ctxArgs) => {
-      const cb = await newCouchbaseConnection();
+      const cb = await connectionPromise;
       return createContext(ctxArgs, { logger, cb });
     },
-    onError: ({ path, error, input }) => {
+    onError: ({ error }) => {
       logger.error(error);
     },
   });
 
   httpServer.listen(appConfig.PORT);
+  
+  let close = undefined as undefined | Promise<void>;
 
-  const close = promisify(httpServer.close).bind(httpServer);
-  return async () => await close();
+  return () => {
+    if (close) return close;
+    
+    close = new Promise<void>((res, rej) => {
+      httpServer.close((err) => {
+        if (err) {
+          rej(err);
+        }
+
+        res();
+      });
+    });
+    
+    return close;
+  };
 }
