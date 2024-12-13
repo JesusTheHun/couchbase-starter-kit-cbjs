@@ -8,8 +8,5 @@
       "src/*": ["./*"]
     }
   },
-  "include": ["./"],
-  "references": [
-    { "path": "./database/schemas" }
-  ]
+  "include": ["./"]
 }

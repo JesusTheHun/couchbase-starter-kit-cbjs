@@ -12,9 +12,9 @@
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "dev": "tsc --build --watch",
-    "server": "node dist/src/index.js",
-    "server-dev": "cross-env NODE_ENV=development pnpm dlx tsx watch src/index.ts",
-    "build": "rm -rf dist && tsc -p tsconfig.build.json && tsconfig-replace-paths --project tsconfig.build.json",
+    "server": "node src/dist/index.js",
+    "server-dev": "cross-env NODE_ENV=development pnpm dlx tsx watch --tsconfig tsconfig.tsx.json src/index.ts",
+    "build": "cd src && rm -rf dist && tsc --build tsconfig.build.json && tsconfig-replace-paths --project tsconfig.build.json",
     "test": "cross-env NODE_ENV=test vitest --config vitest.config.mts run",
     "test:watch": "cross-env NODE_ENV=test vitest --config vitest.config.mts watch",
     "ts:check": "tsc --noEmit --noEmitOnError"
