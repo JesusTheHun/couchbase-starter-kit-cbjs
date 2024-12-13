@@ -54,11 +54,11 @@ describe('getComments', () => {
       },
     });
 
+    await waitForAllComments(cb);
+    
     const { comments } = await trpcCaller.articles.getComments({
       slug: article.slug,
     });
-
-    await waitForAllComments(cb);
 
     expect(comments).toHaveLength(1);
     expect(comments).toEqual([
