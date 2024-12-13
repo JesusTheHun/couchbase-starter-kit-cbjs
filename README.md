@@ -52,11 +52,32 @@ Create the couchbase container by running `bash ./tests/scripts/createCouchbaseC
 
 ```bash
 nvm install
+corepack enable
 pnpm i
-pnpm run dev # The server will be reloaded when a change is detected
 ```
 
-To build the app and start in production mode :
+## Development
+
+Since the project uses project references, you must run the following command to
+have TypeScript make incremental builds :
+
+```bash
+pnpm run dev # TypeScript incremental builds
+```
+
+I suggest you run the test once with `pnpm run test` before starting the server, because it will automatically create all the keyspaces and indexes required by the project.  
+
+If you want to run the server in dev mode, so the server is reloaded when a change
+is detected, execute the following command :
+
+```bash
+pnpm run server-dev # The server will be reloaded when a change is detected
+```
+
+## Production
+
+To build the app and start in production mode, make sure you have all the keyspaces and indexes required, then execute the commands below.
+Note that when you run the tests, if will automatically create all the keyspaces and indexes for you, which is convenient if you are trying to execute the production build on your local machine.
 
 ```bash
 pnpm run build
